@@ -3,6 +3,7 @@ const searchSongs=()=>{
    // console.log(searchText);
     const url=`https://api.lyrics.ovh/suggest/${searchText}`;
    // console.log(url);
+   displaySpinner();
     fetch(url)
     .then(res=>res.json())
     .then(data=>{
@@ -44,6 +45,7 @@ const displaySong=songs=>{
         </div>
         `;
         songContainer.appendChild(div);
+        displaySpinner();
     });
 }
 
@@ -85,3 +87,20 @@ const displayError=(error)=>{
     const errorMsg=document.getElementById('errorMsg');
     errorMsg.innerText=error;
 }
+
+//spinner display
+const displaySpinner=()=>{
+  const spinner=document.getElementById('spinner');
+  console.log(spinner);
+  spinner.classList.toggle('d-none');
+}
+
+//js SearchBox
+
+document.getElementById("search-field")
+    .addEventListener("keypress", function(event) {
+    //event.preventDefault();
+    if (event.key === 13) {
+        document.getElementById("search-btn").click();
+    }
+});
